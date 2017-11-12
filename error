@@ -1,0 +1,11 @@
+1.nginx
+  背景：安装目录/usr/local/nginx
+  1.启动 停止 重启 /usr/local/nginx/sbin/nginx -s |stop|reload
+  2.配置
+    nginx.conf
+      user = 启动nginx的用户，和网站权限有关
+      http{
+        server{
+          
+        }
+      }
