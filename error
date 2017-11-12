@@ -9,3 +9,19 @@
           
         }
       }
+      
+2.uwsgi支持多个python版本
+    1.mkdir /data/uwsgi
+    2.cp uwsgi.tar.gz /data/uwsgi
+    3.tar -zxvf uwsgi.tar.gz
+    4.cd uwsgi
+    5.vim ./buildconf/core.ini
+      添加
+        plugin_dir = /data/uwsgi
+        bin_name = /usr/bin/uwsgi
+    6.python uwsgiconfig.py --build core #python版本任意
+    7.为需要使用的python版本创建plugin
+        python2.6 uwsgiconfig.pu --plugin plugins/python core python26
+        python2.7 uwsgiconfig.py --plugin plugins/python core python27
+        python3.6 uwsgiconfig.py --plugin plugins/python core python36
+      
