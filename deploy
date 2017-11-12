@@ -1,0 +1,33 @@
+nginx+uwsgi+django+ubuntu16
+  projectname/uwsgi.ini
+      [uwsgi]
+      socket= localhost:8001
+      chdir=/home/myven/prej/Deploy
+      module=Deploy.wsgi:application
+      master=True
+      pidfile=/tmp/Deploy-master.pid
+      vacuum=True
+      max-requests=5000
+      daemonize=/var/log/uwsgi/Deploy.log
+      home=/home/myven
+      thunder-lock=True
+      plugin=python36 #根据实际的plugin名字
+      
+ nginx.conf
+      server {
+        listen 80;
+        server_name localhost;
+        location / {
+        root /home/myven/prej/Deploy;
+        include uwsgi_params;
+        uwsgi_pass 127.0.0.1:8001;
+        uwsgi_param UWSGI_CHDIR /home/myven/prej/Deploy;
+        uwsgi_param UWSGI_SCRIPT Deploy.wsgi;
+        access_log /var/log/nginx/access.log;
+        }
+
+        location /static/ {
+        alias /home/myven/prej/Deploy/static/;
+        }
+
+      }
